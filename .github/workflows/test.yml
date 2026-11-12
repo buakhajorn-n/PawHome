@@ -14,14 +14,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      # ยังไม่มี package-lock.json จึงใช้ npm install แทน npm ci
-      # (เมื่อ commit lockfile แล้ว ค่อยเปลี่ยนกลับเป็น npm ci + cache: npm)
-      - run: npm install --no-audit --no-fund
-      # เก็บ lockfile ที่ได้ไว้ให้ดาวน์โหลดไป commit
-      - uses: actions/upload-artifact@v4
-        with:
-          name: package-lock
-          path: frontend/package-lock.json
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci --no-audit --no-fund
       - run: npm test -- --watchAll=false
         env:
           CI: true
