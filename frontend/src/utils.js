@@ -10,7 +10,6 @@ export const APP_STATUS = {
   completed: 'รับเลี้ยงเรียบร้อย',
 };
 export const HOUSING = { house: 'บ้าน', condo: 'คอนโด', apartment: 'อพาร์ตเมนต์/หอพัก', other: 'อื่น ๆ' };
-export const EMOJI = { dog: '🐶', cat: '🐱', other: '🐰' };
 
 export const petBadge = {
   available: 'bg-emerald-100 text-emerald-700',

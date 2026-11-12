@@ -1,17 +1,16 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { EMOJI, PET_STATUS, SEX, SPECIES, formatAge, petBadge } from '../utils';
+import { PET_STATUS, SEX, SPECIES, formatAge, petBadge } from '../utils';
+import PetArt from './PetArt';
 
-// รูปสัตว์: ถ้าไม่มีรูปใช้อีโมจิตามประเภทแทน
+// รูปสัตว์: ถ้าไม่มีรูป หรือลิงก์รูปเสีย ใช้ภาพวาดที่สร้างจากลักษณะของสัตว์แทน
 export function PetImage({ pet, className = '' }) {
-  if (pet.imageUrl) {
-    return <img src={pet.imageUrl} alt={`รูปของ ${pet.name}`} loading="lazy" className={'w-full object-cover ' + className} />;
+  const [broken, setBroken] = useState(false);
+  if (pet.imageUrl && !broken) {
+    return <img src={pet.imageUrl} alt={`รูปของ ${pet.name}`} loading="lazy" onError={() => setBroken(true)}
+                className={'w-full object-cover ' + className} />;
   }
-  return (
-    <div role="img" aria-label={`ยังไม่มีรูปของ ${pet.name}`}
-         className={'grid w-full place-items-center bg-slate-100 text-6xl ' + className}>
-      {EMOJI[pet.species] || '🐾'}
-    </div>
-  );
+  return <PetArt pet={pet} className={className} />;
 }
 
 // การ์ดสัตว์ 1 ใบ รับ object ตาม API: { id, name, species, breed, ageMonths, sex, status, imageUrl }

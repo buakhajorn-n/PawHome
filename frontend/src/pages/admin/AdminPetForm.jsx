@@ -107,7 +107,7 @@ function AdminPetForm() {
           <label className="flex items-center gap-2"><input type="checkbox" checked={form.vaccinated} onChange={toggle('vaccinated')} /> ฉีดวัคซีนแล้ว</label>
           <label className="flex items-center gap-2"><input type="checkbox" checked={form.sterilized} onChange={toggle('sterilized')} /> ทำหมันแล้ว</label>
         </div>
-        <Field label="ลิงก์รูปภาพ" error={errors.imageUrl} hint="เว้นว่างได้ จะแสดงอีโมจิแทน"><input value={form.imageUrl} onChange={set('imageUrl')} className={inputClass} /></Field>
+        <Field label="ลิงก์รูปภาพ" error={errors.imageUrl} hint="เว้นว่างได้ ระบบจะวาดภาพตามประเภท สายพันธุ์ และอายุให้แทน"><input value={form.imageUrl} onChange={set('imageUrl')} className={inputClass} /></Field>
         {isNew && (
           <Field label="สถานะเริ่มต้น">
             <select value={form.status} onChange={set('status')} className={inputClass}>
