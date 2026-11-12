@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { completeApplication, getAdminApplications, reviewApplication } from '../../api/backend';
 import { useAuth } from '../../auth/AuthContext';
-import { ConfirmBox, ErrorBox, Loading, btnDanger, btnGhost, btnPrimary, inputClass } from '../../components/ui';
+import { ConfirmBox, ErrorBox, Loading, btnDanger, btnPrimary, inputClass } from '../../components/ui';
 import { APP_STATUS, HOUSING, appBadge, dateTH } from '../../utils';
 
 const TABS = [['pending', 'รอตรวจสอบ'], ['approved', 'อนุมัติแล้ว'], ['completed', 'สำเร็จ'], ['rejected', 'ไม่ผ่าน'], ['cancelled', 'ยกเลิก'], ['', 'ทั้งหมด']];
