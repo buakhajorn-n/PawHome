@@ -25,9 +25,19 @@ jobs:
       - run: npm test -- --watchAll=false
         env:
           CI: true
-      - run: npm run build   # เช็กว่า build แบบเดียวกับ Vercel ผ่าน
+      # เช็กว่า build แบบเดียวกับ Vercel ผ่าน (CI=true ทำให้ ESLint warning นับเป็น error)
+      # ถ้าพัง จะแสดงท้าย log เป็น annotation บนหน้า Actions
+      - name: npm run build
+        shell: bash
         env:
           CI: true
+        run: |
+          set -o pipefail
+          if ! npm run build 2>&1 | tee build.log; then
+            msg=$(tail -n 60 build.log | sed -e 's/%/%25/g' | sed -e ':a;N;$!ba;s/\n/%0A/g')
+            echo "::error title=npm run build failed::${msg}"
+            exit 1
+          fi
 
   backend:
     runs-on: ubuntu-latest
