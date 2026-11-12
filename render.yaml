@@ -1,0 +1,23 @@
+# Render Blueprint: New > Blueprint > เลือก GitHub repo นี้ (หรือสร้าง Web Service เองแล้วกรอกค่าเดียวกัน)
+services:
+  - type: web
+    name: pawhome-api
+    runtime: go
+    rootDir: backend
+    buildCommand: go build -o app .
+    startCommand: ./app
+    healthCheckPath: /api/health
+    plan: free
+    envVars:
+      - key: DATABASE_URL
+        sync: false          # Supabase Session pooler connection string
+      - key: JWT_SECRET
+        generateValue: true  # Render สุ่มให้
+      - key: ALLOWED_ORIGINS
+        sync: false          # เช่น https://your-site.vercel.app
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: ADMIN_NAME
+        value: PawHome Admin
